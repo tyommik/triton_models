@@ -1,0 +1,49 @@
+name: "detector_yolov4_1_class_post"
+backend: "python"
+
+input [
+  {
+    name: "YOLO_01"
+    data_type: TYPE_FP32
+    dims: [ -1, -1, -1, -1 ]
+  },
+  {
+    name: "YOLO_02"
+    data_type: TYPE_FP32
+    dims: [ -1, -1, -1, -1  ]
+  },
+  {
+    name: "YOLO_03"
+    data_type: TYPE_FP32
+    dims: [ -1, -1, -1, -1  ]
+  },
+  {
+    name: "ORIG_SHAPE"
+    data_type: TYPE_INT32
+    dims: [ 1, 2 ]
+  },
+  {
+    name: "POST_SHAPE"
+    data_type: TYPE_FP16
+    dims: [ 1, 2 ]
+  }
+]
+output [
+  {
+    name: "OUTPUT0"
+    data_type: TYPE_INT32
+    dims: [ -1, 4 ]
+  },
+  {
+    name: "OUTPUT1"
+    data_type: TYPE_FP16
+    dims: [ -1 ]
+  },
+  {
+    name: "OUTPUT2"
+    data_type: TYPE_INT32
+    dims: [ -1 ]
+  }
+]
+
+instance_group [{ kind: KIND_CPU }]

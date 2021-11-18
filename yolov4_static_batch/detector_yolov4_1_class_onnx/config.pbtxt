@@ -1,0 +1,23 @@
+name: "detector_yolov4_1_class_onnx"
+platform: "onnxruntime_onnx"
+default_model_filename: "yolov4_-1_3_704_704_dynamic.onnx"
+max_batch_size: 0
+input [
+  {
+    name: "input"
+    data_type: TYPE_FP32
+    dims: [ -1, 3, 704, 704 ]
+  }
+]
+output [
+  {
+    name: "boxes"
+    data_type: TYPE_FP32
+    dims: [ -1, 30492, 1, 4 ]
+  },
+  {
+    name: "confs"
+    data_type: TYPE_FP32
+    dims: [ -1, 30492, 1]
+  }
+]

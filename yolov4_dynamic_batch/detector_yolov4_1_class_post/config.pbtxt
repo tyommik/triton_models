@@ -1,0 +1,59 @@
+name: "detector_yolov4_1_class_post"
+backend: "python"
+max_batch_size: 16
+dynamic_batching {
+  preferred_batch_size: [4, 8, 16]
+  max_queue_delay_microseconds: 200
+}
+
+input [
+  {
+    name: "YOLO_01"
+    data_type: TYPE_FP32
+    dims: [ 162624, 1, 1 ]
+  },
+  {
+    name: "YOLO_02"
+    data_type: TYPE_FP32
+    dims: [ 40656, 1, 1 ]
+  },
+  {
+    name: "YOLO_03"
+    data_type: TYPE_FP32
+    dims: [ 10164, 1, 1  ]
+  },
+  {
+    name: "ORIG_SHAPE"
+    data_type: TYPE_INT32
+    dims: [ 2 ]
+  },
+  {
+    name: "POST_SHAPE"
+    data_type: TYPE_FP16
+    dims: [ 2 ]
+  }
+]
+output [
+  {
+    name: "OUTPUT0"
+    data_type: TYPE_INT32
+    dims: [ -1, 4 ]
+  },
+  {
+    name: "OUTPUT1"
+    data_type: TYPE_FP16
+    dims: [ -1 ]
+  },
+  {
+    name: "OUTPUT2"
+    data_type: TYPE_INT32
+    dims: [ -1 ]
+  },
+  {
+    name: "OUTPUT3"
+    data_type: TYPE_INT32
+    dims: [ -1 ]
+  }
+]
+
+instance_group [{ kind: KIND_CPU }]
